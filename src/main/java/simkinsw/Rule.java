@@ -18,6 +18,10 @@ public class Rule {
     }
 
 
+    public int getIndex() {
+        return index;
+    }
+
     public String getError(Order order) {
         int itemCount = order.getItemCounts()[index];
         if (itemCount < min) {

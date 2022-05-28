@@ -1,4 +1,4 @@
-package evive;
+package simkinsw;
 
 public class Rule {
     
@@ -8,7 +8,7 @@ public class Rule {
     private String errorLow;
     private String errorHigh;
 
-    
+
     public Rule(int index, int min, int max, String errorLow, String errorHigh) {
         this.index = index;
         this.min = min;

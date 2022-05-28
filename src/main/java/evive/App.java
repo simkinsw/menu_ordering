@@ -16,11 +16,11 @@ public class App
     {
         createMealRules();
 
-        processOrder("Dinner 1,2,3");
+        System.out.println(processOrder("Dinner 1,2,3"));
     }
 
 
-    public static void processOrder(String input) {
+    public static String processOrder(String input) {
         //TODO: Lots to do here to handle invalid inputs. E.g. "Lunch"
 
         int spaceLoc = input.indexOf(" ");
@@ -37,7 +37,7 @@ public class App
 
         Order order = new Order(mealName, itemIDs);
         Meal meal = mealObjects.get(mealName);
-        System.out.println(meal.generateOutput(order));
+        return meal.generateOutput(order);
     }
 
 

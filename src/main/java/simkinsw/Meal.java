@@ -11,7 +11,7 @@ public class Meal {
     private static final String[] BREAKFAST_MENU = {"", "Eggs", "Toast", "Coffee"};
     private static final String[] LUNCH_MENU = {"", "Sandwich", "Chips", "Soda"};
     private static final String[] DINNER_MENU = {"", "Steak", "Potatoes", "Wine", "Cake"};
-    private static final Map<String, String[]> itemNames = ImmutableMap.of("Breakfast", BREAKFAST_MENU, 
+    private static final Map<String, String[]> ITEM_NAMES = ImmutableMap.of("Breakfast", BREAKFAST_MENU, 
                                                                 "Lunch", LUNCH_MENU, "Dinner", DINNER_MENU);
 
     private List<Rule> rules;
@@ -34,7 +34,7 @@ public class Meal {
 
         for (Rule rule : rules) {
             if (!rule.passesRule(o)) {
-                output += rule.getError(o) + ",";
+                output += rule.getErrorMessage(o) + ",";
                 validOrder = false;
             }
         }
@@ -49,10 +49,10 @@ public class Meal {
         for (int i = 1; i < itemCounts.length; i++) {
             int count = itemCounts[i];
             if (count == 1) {
-                output += itemNames.get(mealName)[i] + ", ";
+                output += ITEM_NAMES.get(mealName)[i] + ", ";
             }
             else if (count > 1) {
-                output += itemNames.get(mealName)[i] + "(" + count + "), ";
+                output += ITEM_NAMES.get(mealName)[i] + "(" + count + "), ";
             }
         }
 

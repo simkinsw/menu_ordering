@@ -18,7 +18,11 @@ public class Rule {
     }
 
 
-    public String getErrorMessage(Order order) {
+    public int getIndex() {
+        return index;
+    }
+
+    public String getError(Order order) {
         int itemCount = order.getItemCounts()[index];
         if (itemCount < min) {
             return errorLow;

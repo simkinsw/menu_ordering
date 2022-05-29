@@ -1,24 +1,18 @@
 package simkinsw;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.List;
-
-import com.google.common.collect.ImmutableMap;
+import java.util.StringJoiner;
 
 public class Meal {
 
-    private static final String[] BREAKFAST_MENU = {"", "Eggs", "Toast", "Coffee"};
-    private static final String[] LUNCH_MENU = {"", "Sandwich", "Chips", "Soda"};
-    private static final String[] DINNER_MENU = {"", "Steak", "Potatoes", "Wine", "Cake"};
-    private static final Map<String, String[]> ITEM_NAMES = ImmutableMap.of("Breakfast", BREAKFAST_MENU, 
-                                                                "Lunch", LUNCH_MENU, "Dinner", DINNER_MENU);
-
     private List<Rule> rules;
+    private String[] menu;
 
 
-    public Meal() {
+    public Meal(String[] menu) {
         rules = new ArrayList<Rule>();
+        this.menu = menu;
     }
 
 
@@ -27,36 +21,42 @@ public class Meal {
     }
 
 
-    //TODO: Water is Wrong
     public String generateOutput(Order o) {
-        String output = "Unable to process: ";
+        StringJoiner sj = new StringJoiner(", ", "Unable to process: ", "");
         boolean validOrder = true;
 
         for (Rule rule : rules) {
             if (!rule.passesRule(o)) {
-                output += rule.getErrorMessage(o) + ",";
+                String error = rule.getError(o);
+                error = error.replace("***", menu[rule.getIndex()]);
+                sj.add(error);
                 validOrder = false;
             }
         }
 
         if (!validOrder) {
-            return output.substring(0, output.length() - 1);
+            return sj.toString();
         }
 
-        output = "";
-        String mealName = o.getMealName();
+        List<String> outputItems = new ArrayList<String>();
         int[] itemCounts = o.getItemCounts();
-        for (int i = 1; i < itemCounts.length; i++) {
+        for (int i = 0; i < itemCounts.length; i++) {
             int count = itemCounts[i];
             if (count == 1) {
-                output += ITEM_NAMES.get(mealName)[i] + ", ";
+                outputItems.add(menu[i]);
             }
             else if (count > 1) {
-                output += ITEM_NAMES.get(mealName)[i] + "(" + count + "), ";
+                outputItems.add(menu[i] + "(" + count + ")");
             }
         }
+        if(o.getMealName().equals("Dinner")) {
+            outputItems.add(outputItems.size() - 1, "Water");
+        }
+        else if(itemCounts[2] == 0) {
+            outputItems.add("Water");
+        }
 
-        return output.substring(0, output.length() - 2);
+        return String.join(", ", outputItems);
     }
 
 }

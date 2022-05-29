@@ -1,25 +1,27 @@
 package simkinsw;
 
-import java.util.List;
-
 public class Order {
-    private static final int MIN_ID = 1;
-    private static final int MAX_ID = 4;
+    private static final int MAX_ID = 3;
 
     private String mealName;
     private int[] itemCounts;
 
+    public Order(String input) {
+        int spaceLoc = input.indexOf(" ");
+        this.mealName = input.substring(0, spaceLoc);
 
-    public Order(String mealName, List<Integer> itemIDs) {
-        this.mealName = mealName;
-        
+        //Handling invalid input?
+        String[] stringIDs = input.substring(spaceLoc + 1).split(",");
+
+        //surely this can be fancier
         itemCounts = new int[MAX_ID + 1];
-        for (Integer id : itemIDs) {
-            if (id < MIN_ID || id > MAX_ID) {
-                //throw some exception here 
+        for (String id : stringIDs) {
+            int idNum = Integer.parseInt(id.trim()) - 1;
+            if (idNum < 0 || idNum > MAX_ID) {
+                //throw exception
             }
-            itemCounts[id]++;
-        }
+            itemCounts[idNum]++;
+        }   
     }
 
     public int[] getItemCounts() {

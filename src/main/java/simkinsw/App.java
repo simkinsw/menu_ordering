@@ -2,6 +2,8 @@ package simkinsw;
 
 import java.util.Map;
 import com.google.common.collect.ImmutableMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Solution for Evive Engineering Test 
@@ -15,13 +17,11 @@ import com.google.common.collect.ImmutableMap;
 public class App 
 {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
+
     private static final String[] BREAKFAST_MENU = {"Eggs", "Toast", "Coffee"};
     private static final String[] LUNCH_MENU = {"Sandwich", "Chips", "Soda"};
     private static final String[] DINNER_MENU = {"Steak", "Potatoes", "Wine", "Cake"};
-
-    private static Meal breakfast;
-    private static Meal lunch;
-    private static Meal dinner;
 
     //References to each of the 3 mealObjects by String ("Breakfast", "Lunch", or "Dinner")
     public static Map<String, Meal> mealObjects;
@@ -30,8 +30,7 @@ public class App
     public static void main( String[] args )
     {
         initializeMeals();
-        System.out.println(processOrder("Lunch 1,1,2, 3"));
-        
+        LOGGER.info(processOrder(args[0]));
     }
 
     /**
@@ -54,9 +53,9 @@ public class App
      * add them to the mealObjects map and populate them with Rules
      */
     public static void initializeMeals() {
-        breakfast = new Meal(BREAKFAST_MENU);
-        lunch = new Meal(LUNCH_MENU);
-        dinner = new Meal(DINNER_MENU);
+        Meal breakfast = new Meal(BREAKFAST_MENU);
+        Meal lunch = new Meal(LUNCH_MENU);
+        Meal dinner = new Meal(DINNER_MENU);
 
         mealObjects = ImmutableMap.of("Breakfast", breakfast, "Lunch", lunch, "Dinner", dinner);
 

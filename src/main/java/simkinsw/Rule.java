@@ -32,7 +32,7 @@ public class Rule {
     }
 
     /**
-     * 
+     * Returns the correct error message for an Order
      * @param order - An single Order object to be checked
      * @return The appropriate error message if order does not satisfy this rule
      *         or "No Error" if it does satisfy
@@ -53,7 +53,7 @@ public class Rule {
 
 
     /**
-     * 
+     * Checks to see if an Order meets the criteria of this rule  
      * @param order - A single Order object to be checked
      * @return True if order satisfies both the min and max condition of this rule
      *         or False if it does not satisfy one or both conditions 

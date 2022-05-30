@@ -3,13 +3,13 @@ Evive Software Engineer Test
 
 ## Requirements
 #### General Use ####
-Java 11
-Maven
+* Java 11
+* Maven
 
 #### Dependencies ####
-JUnit 4.13.2
-Guava 10.0.1
-SLF4J
+* JUnit 4.13.2
+* Guava 10.0.1
+* SLF4J
 
 ## Building ##
 Clone the repository and run `mvn install`

@@ -1,12 +1,12 @@
-# Menu_Ordering #
+# Menu Ordering #
 Evive Software Engineer Test
 
 ## Requirements
-#### General Use ####
+General Use
 * Java 11
 * Maven
 
-#### Dependencies ####
+Dependencies
 * JUnit 4.13.2
 * Guava 10.0.1
 * SLF4J

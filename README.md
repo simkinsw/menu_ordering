@@ -16,6 +16,7 @@ Clone the repository and run `mvn install`
 
 ## Usage ##
 Run the program with `mvn compile exec:java -Dexec.args="<Input>"`
+
 Input should be a meal (Breakfast, Lunch, or Dinner) followed by a space and a 
 comma-separated list of Menu numbers, e.g. "Breakfast 1,2,2,3". 
 

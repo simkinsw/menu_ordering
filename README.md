@@ -18,7 +18,7 @@ Clone the repository and run `mvn install`
 Run the program with `mvn compile exec:java -Dexec.args="<Input>"`
 
 Input should be a meal (Breakfast, Lunch, or Dinner) followed by a space and a 
-comma-separated list of Menu numbers, e.g. "Breakfast 1,2,2,3". 
+comma-separated list of Menu numbers, e.g. "Breakfast 1,2,3,3". 
 
 The program will log the names of the items ordered or an error message if the 
 order is invalid.

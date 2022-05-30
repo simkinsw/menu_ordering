@@ -3,6 +3,14 @@ package simkinsw;
 import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 
+/**
+ * Solution for Evive Engineering Test 
+ * System that takes String orders for breakfast, lunch, and dinner and outputs
+ * the items they ordered according to a set of rules and a menu
+ * 
+ * @author Will Simkins 
+ * @since 5/29/22
+ */
 
 public class App 
 {
@@ -15,7 +23,9 @@ public class App
     private static Meal lunch;
     private static Meal dinner;
 
+    //References to each of the 3 mealObjects by String ("Breakfast", "Lunch", or "Dinner")
     public static Map<String, Meal> mealObjects;
+
 
     public static void main( String[] args )
     {
@@ -24,7 +34,13 @@ public class App
         
     }
 
-
+    /**
+     * Processes a single order
+     * @param input - String provided by user representing a single order
+     *        Should be a meal name and a comma-separated list of item numbers    
+     * @return String with the names of the items ordered or an error message
+     *         for invalid orders
+     */
     public static String processOrder(String input) {
         Order o = new Order(input);
         String mealName = o.getMealName();
@@ -33,7 +49,10 @@ public class App
         return meal.generateOutput((o));
     }
 
-
+    /**
+     * Run once at the beginning to create Breakfast, Lunch, and dinner Meal objects, 
+     * add them to the mealObjects map and populate them with Rules
+     */
     public static void initializeMeals() {
         breakfast = new Meal(BREAKFAST_MENU);
         lunch = new Meal(LUNCH_MENU);
@@ -41,7 +60,7 @@ public class App
 
         mealObjects = ImmutableMap.of("Breakfast", breakfast, "Lunch", lunch, "Dinner", dinner);
 
-        Rule exactlyOneMainDish = new Rule(0, 1, 1, "Meal is missing", "*** cannot be ordered more than once");
+        Rule exactlyOneMainDish = new Rule(0, 1, 1, "Main is missing", "*** cannot be ordered more than once");
         Rule exactlyOneSide = new Rule(1, 1, 1, "Side is missing", "*** cannot be ordered more than once");
         Rule noDessert = new Rule(3, 0, 0, "Unreachable errorLow", "Dessert cannot be ordered with breakfast");
 

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+/**
+ * Represents a single meal as an array of foods that can be ordered for that meal
+ * and a list of rules that each order must follow (e.g. At dinner, dessert must be ordered)
+ */
 public class Meal {
 
     private List<Rule> rules;
@@ -20,23 +24,29 @@ public class Meal {
         rules.add(newRule);
     }
 
-
+    /**
+     * Validates and produces output for a single Order object associated with this meal
+     * @param o - A single order made for this meal
+     * @return A String which is a list of foods ordered for valid orders or an error 
+     *         message for orders which do not follow all rules
+     */
     public String generateOutput(Order o) {
-        StringJoiner sj = new StringJoiner(", ", "Unable to process: ", "");
+        StringJoiner errorMessage = new StringJoiner(", ", "Unable to process: ", "");
         boolean validOrder = true;
 
         for (Rule rule : rules) {
             if (!rule.passesRule(o)) {
                 String error = rule.getError(o);
                 error = error.replace("***", menu[rule.getIndex()]);
-                sj.add(error);
+                errorMessage.add(error);
                 validOrder = false;
             }
         }
 
         if (!validOrder) {
-            return sj.toString();
+            return errorMessage.toString();
         }
+        
 
         List<String> outputItems = new ArrayList<String>();
         int[] itemCounts = o.getItemCounts();

@@ -30,7 +30,12 @@ public class App
     public static void main( String[] args )
     {
         initializeMeals();
-        LOGGER.info(processOrder(args[0]));
+        if (args.length < 1) {
+            LOGGER.warn("Please provide input, ex. \"Breakfast 1, 2, 3\"");
+        }
+        else {
+            LOGGER.info(processOrder(args[0]));
+        }
     }
 
     /**
